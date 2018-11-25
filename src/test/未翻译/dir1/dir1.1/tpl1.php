@@ -5,7 +5,7 @@
  * Date: 2018/11/25
  * Time: 14:28
  */
-$nomal = '大家好啊';
+$nomal = '今天你开心吗';
 ?>
 <!doctype html>
 <html lang="zh">

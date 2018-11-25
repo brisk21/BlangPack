@@ -5,7 +5,7 @@
  * Date: 2018/11/25
  * Time: 14:28
  */
-$nomal = '我是正常输出的变量';
+$nomal = '我也是正常输出的变量';
 ?>
 <!doctype html>
 <html lang="zh">
@@ -19,10 +19,10 @@ $nomal = '我是正常输出的变量';
 <body>
 <div>测试</div>
 <div>
-    <h1>测试php输出</h1>
+    <h1>我知道我只喜欢独自流浪</h1>
     <ul>
-        <li><?php echo '我是单引号字符串'?></li>
-        <li><?php echo "我是双引号字符串"?></li>
+        <li><?php echo '程序啊你要开心'?></li>
+        <li><?php echo "单身自由呗"?></li>
         <li><?php echo $nomal?></li>
     </ul>
 </div>

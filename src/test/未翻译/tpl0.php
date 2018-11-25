@@ -5,7 +5,7 @@
  * Date: 2018/11/25
  * Time: 14:28
  */
-$nomal = '我是正常输出的变量';
+$nomal = '自动化生成语言包';
 ?>
 <!doctype html>
 <html lang="zh">
@@ -22,7 +22,7 @@ $nomal = '我是正常输出的变量';
     <h1>测试php输出</h1>
     <ul>
         <li><?php echo '我是单引号字符串'?></li>
-        <li><?php echo "我是双引号字符串"?></li>
+        <li><?php echo "爱我要说出来"?></li>
         <li><?php echo $nomal?></li>
     </ul>
 </div>

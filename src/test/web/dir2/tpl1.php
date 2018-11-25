@@ -5,7 +5,7 @@
  * Date: 2018/11/25
  * Time: 14:28
  */
-$nomal =  $lang['woshizhengchangshuchudebianliang'];
+$nomal =  $lang['woyeshizhengchangshuchudebianliang'];
 ?>
 <!doctype html>
 <html lang="zh">
@@ -19,10 +19,10 @@ $nomal =  $lang['woshizhengchangshuchudebianliang'];
 <body>
 <div><?php echo $lang['ceshi']; ?></div>
 <div>
-    <h1><?php echo $lang['ceshi']; ?>php<?php echo $lang['shuchu']; ?></h1>
+    <h1><?php echo $lang['wozhidaowozhixihuanduziliulang']; ?></h1>
     <ul>
-        <li><?php echo  $lang['woshidanyinhaozifuchuan']?></li>
-        <li><?php echo $lang['woshishuangyinhaozifuchuan']?></li>
+        <li><?php echo  $lang['chengxuaniyaokaixin']?></li>
+        <li><?php echo $lang['danshenziyou']?></li>
         <li><?php echo $nomal?></li>
     </ul>
 </div>

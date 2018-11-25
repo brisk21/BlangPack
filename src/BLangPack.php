@@ -36,7 +36,11 @@ class BLangPack {
      * */
     public $langArr = ['en'];
 
-    public $chinese_arr = [];
+    /*
+     * 原本的语言
+     */
+    public $fromLanguage = 'zh';
+
     public function __construct($dir,$langpackdir)
     {
         if(!is_dir($dir)) exit("The read file directory does not exist\n");
@@ -45,45 +49,14 @@ class BLangPack {
         $this->langpackdir = $langpackdir;
     }
 
-    /*
-     * 目录读取
-     * @return string //返回目录中所有文件
-     * */
-    public function scanDir($filedir){
-        $files = array();
-        if($handle = @opendir($filedir)) { //注意这里要加一个@，不然会有warning错误提示：）
-            while(($file = readdir($handle)) !== false) {
-                if($file != ".." && $file != ".") { //排除根目录；
-                    if(is_dir($filedir."/".$file)) { //如果是子文件夹，就进行递归
-                        $files[$file] = $this->scanDir($filedir."/".$file);
-                    } else { //不然就将文件的名字存入数组；
-                        $files[] = $filedir."/".$file;
-                    }
-
-                }
-            }
-            closedir($handle);
-            return $files;
-        }
-        return $files;
-    }
-
     //查找中文
     protected function MatchChinese($file)
     {
         $data = $this->loadFile($file);
         $chinese = MatchChinese::pregMatch($data);//查找中文字符串
+        if (!$chinese) return false;
         MatchChinese::contentReplaceTowrite($file, $data, $chinese);//替换变量
         return $chinese;
-    }
-    function t1($dir)
-    {
-        $files = [];
-        foreach(glob($dir.'*.php') as $filename)
-        {
-            $files[] = $filename;
-        }
-        return $files;
     }
 
     /**
@@ -91,14 +64,12 @@ class BLangPack {
      * @param $dir
      * @return array
      */
-    function scanfiles($dir)
+    public function scanfiles($dir)
     {
         if (! is_dir ( $dir ))
             return array ();
-
         // 兼容各操作系统
         $dir = rtrim ( str_replace ( '\\', '/', $dir ), '/' ) . '/';
-
         // 栈，默认值为传入的目录
         $dirs = array ( $dir );
         // 放置所有文件的容器
@@ -121,7 +92,6 @@ class BLangPack {
                     $rt [] = $path;
                 }
             }
-
         } while ( $dirs ); // 直到栈中没有目录
         return $rt;
     }
@@ -142,9 +112,9 @@ class BLangPack {
     /*
     *执行
     *@return bool
-     * fixme 缺少深度遍历和匹配
     * */
-    public function run(){
+    public function run()
+    {
         try {
             $files = $this->scanfiles($this->filedir);
             $ZhArr = $this->getSourceStr($files);
@@ -153,7 +123,7 @@ class BLangPack {
             foreach ($ZhArr as $item){
                 $chineseArr =  array_merge($chineseArr,$item);
             }
-            $chineseArr = array_flip($chineseArr);//翻转
+            $chineseArr = array_flip($chineseArr);//数组反转
             $chineseArr = array_keys($chineseArr);
             $chinese = [];
             foreach ($chineseArr as $key => $v) {
@@ -175,23 +145,24 @@ class BLangPack {
                         print_r($translate);
                     }*/
                     foreach ($chinese as $key => $v) {
-                        $chinese_new[$key] = AutoTranslate::translate($v, 'zh', $lang);
+                        $chinese_new[$key] = AutoTranslate::translate($v,$this->fromLanguage, $lang);
                     }
                     $this->CreateLangPack($chinese_new, $this->extension);
                 }
             }
         } catch (BLangPackException $e) {
-return $e->getMessage();
-}
-return true;
+            return $e->getMessage();
+        }
+    return true;
 }
 
 /*
  * 读取文件
+ * todo 考虑编码转换
  * @param string $sFilename //文件路径
  * @return string //返回文件内容
 */
-public function loadFile($sFilename, $sCharset = 'UTF-8')
+public function loadFile($sFilename)
 {
     if (floatval(phpversion()) >= 4.3) {
         $sData = file_get_contents($sFilename);
@@ -221,9 +192,9 @@ public function loadFile($sFilename, $sCharset = 'UTF-8')
 /*
  * 生成语言包
  * */
-private function CreateLangPack($data = [],$file_type = 'php'){
+private function CreateLangPack($data = [],$file_type = 'php')
+{
     $file_type = strtoupper($file_type);
-
     switch($file_type){
         case 'PHP':
             $langpackfilename = $this->langpackfilename.'.php';

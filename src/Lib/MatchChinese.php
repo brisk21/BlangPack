@@ -27,6 +27,20 @@ class MatchChinese
         return $chinese;
     }
 
+    //数组按value长度逆序
+    public static function arrValueSort($arr)
+    {
+        $ret = [];
+        $return = [];
+        foreach($arr as $key=>$val){
+            $ret[$key] = strlen($val);
+        }
+        arsort($ret);//按长度最大排序
+        foreach ($ret as $pinyin => $item){
+            $return[$pinyin] = $arr[$pinyin];
+        }
+        return $return;
+    }
     /*
      * fixme 替换过程存在重复字符串时导致echo类型替换失败的问题
      *文件中对应语言包替换
@@ -34,14 +48,15 @@ class MatchChinese
      * */
     public static function contentReplaceTowrite($file,$string,$search,$replace = [])
     {
-
         $path_parts = pathinfo($file);
-
         if (!is_file($file) || $path_parts['extension']<>'php' ){
             return false;
         }
+
+        $search = self::arrValueSort($search);
+
         foreach ($search as $key => $v) {
-            $search[$key] = $v;
+            //$search[$key] = $v;
             $res= ChineseToPy::encodePY($v, 'all');//翻译后的
             if (strpos($string,"'".$v."'")){
                 $lang = ' $lang[\''.$res.'\']';
