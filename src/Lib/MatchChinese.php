@@ -6,9 +6,10 @@
  */
 
 namespace BLangPack\Lib;
-use BLangPack\Lib\ChineseToPy;
 
-class MatchChinese {
+
+class MatchChinese
+{
     //过滤规则
     public static $preg_match = "/[\x{4e00}-\x{9fa5}]+/u";
     /*
@@ -35,7 +36,7 @@ class MatchChinese {
      * */
     public static function contentReplaceTowrite($file,$string,$search,$replace = [])
     {
-        if (is_array($file)) return false;
+
         $path_parts = pathinfo($file);
 
         if (!is_file($file) || $path_parts['extension']<>'php' ){

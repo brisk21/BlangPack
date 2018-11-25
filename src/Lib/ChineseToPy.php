@@ -1,9 +1,6 @@
 <?php
 /**
  * 中文转换拼音
- * User: song(343547175@qq.com)
- * Date: 2018-04-16
- * Time: 15:34
  */
 
 namespace BLangPack\Lib;

@@ -1,19 +1,14 @@
 <?php
 /**
  * 自动生成语言包
- * (目前UTF-8文件测试通过)
- * User: song(343547175@qq.com)
- * Date: 2018-04-16
- * Time: 16:01
  */
-
 namespace BLangPack;
 
-use \BLangPack\Exception\BLangPackException;
-use \BLangPack\Lib\MatchChinese;
-use \BLangPack\Lib\AutoTranslate;
-use \BLangPack\Lib\ChineseToPy;
-//use \BLangPack\Autoload;
+use BLangPack\Exception\BLangPackException;
+use BLangPack\Lib\MatchChinese;
+use BLangPack\Lib\AutoTranslate;
+use BLangPack\Lib\ChineseToPy;
+
 
 class BLangPack {
     const VERSION = '1.0.0';
@@ -41,6 +36,7 @@ class BLangPack {
      * */
     public $langArr = ['en'];
 
+    public $chinese_arr = [];
     public function __construct($dir,$langpackdir)
     {
         if(!is_dir($dir)) exit("The read file directory does not exist\n");
@@ -72,36 +68,92 @@ class BLangPack {
         return $files;
     }
 
+    //查找中文
+    protected function MatchChinese($file)
+    {
+        $data = $this->loadFile($file);
+        $chinese = MatchChinese::pregMatch($data);//查找中文字符串
+        MatchChinese::contentReplaceTowrite($file, $data, $chinese);//替换变量
+        return $chinese;
+    }
+    function t1($dir)
+    {
+        $files = [];
+        foreach(glob($dir.'*.php') as $filename)
+        {
+            $files[] = $filename;
+        }
+        return $files;
+    }
+
+    /**
+     * PHP 非递归实现查询该目录下所有文件
+     * @param $dir
+     * @return array
+     */
+    function scanfiles($dir)
+    {
+        if (! is_dir ( $dir ))
+            return array ();
+
+        // 兼容各操作系统
+        $dir = rtrim ( str_replace ( '\\', '/', $dir ), '/' ) . '/';
+
+        // 栈，默认值为传入的目录
+        $dirs = array ( $dir );
+        // 放置所有文件的容器
+        $rt = array ();
+        do {
+            // 弹栈
+            $dir = array_pop ( $dirs );
+            // 扫描该目录
+            $tmp = scandir ( $dir );
+            foreach ( $tmp as $f ) {
+                // 过滤. ..
+                if ($f == '.' || $f == '..')
+                    continue;
+                // 组合当前绝对路径
+                $path = $dir . $f;
+                // 如果是目录，压栈。
+                if (is_dir ( $path )) {
+                    array_push ( $dirs, $path . '/' );
+                } else if (is_file ( $path )) { // 如果是文件，放入容器中
+                    $rt [] = $path;
+                }
+            }
+
+        } while ( $dirs ); // 直到栈中没有目录
+        return $rt;
+    }
+
+    //获取原文
+    public function getSourceStr($file_arr)
+    {
+        $chineseArr = [];
+        foreach ($file_arr as $file){
+            if (!is_file($file)) continue;
+            $chinese = $this->MatchChinese($file);
+            if (empty($chinese)) continue;
+            $chineseArr[] = $chinese;
+        }
+        return $chineseArr;
+    }
+
     /*
     *执行
     *@return bool
      * fixme 缺少深度遍历和匹配
     * */
     public function run(){
-        $chineseArr = [];
         try {
-            $files = $this->scanDir($this->filedir);
-            foreach ($files as $file) {
-                if (is_array($file)) {
-                    foreach ($file as $v) {
-                        if (!is_file($v)) continue;
-                        $data = $this->loadFile($v);
-                        $chinese = MatchChinese::pregMatch($data);
-                        if (empty($chinese)) continue;
-                        $chineseArr = array_merge($chineseArr, $chinese);
-                        MatchChinese::contentReplaceTowrite($file, $data, $chinese);
-                    }
-                } else {
-                    if (!is_file($file)) continue;
-                    $data = $this->loadFile($file);
-
-                    $chinese = MatchChinese::pregMatch($data);
-                    if (empty($chinese)) continue;
-                    $chineseArr = array_merge($chineseArr, $chinese);
-                    MatchChinese::contentReplaceTowrite($file, $data, $chinese);
-                }
+            $files = $this->scanfiles($this->filedir);
+            $ZhArr = $this->getSourceStr($files);
+            $chineseArr=[];
+            //合并一下数组
+            foreach ($ZhArr as $item){
+                $chineseArr =  array_merge($chineseArr,$item);
             }
-            $chineseArr = array_flip($chineseArr);
+            $chineseArr = array_flip($chineseArr);//翻转
             $chineseArr = array_keys($chineseArr);
             $chinese = [];
             foreach ($chineseArr as $key => $v) {
