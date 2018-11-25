@@ -1,8 +1,6 @@
 <?php
 /**
  * 获取文件中的中文
- * Date: 2018-04-16
- * Time: 16:10
  */
 
 namespace BLangPack\Lib;
@@ -30,7 +28,7 @@ class MatchChinese
     }
 
     /*
-     * fixme 目录时未能替换下级，需要修复
+     * fixme 替换过程存在重复字符串时导致echo类型替换失败的问题
      *文件中对应语言包替换
      * 兼容php直接echo的替换，一键匹配
      * */
