@@ -1,7 +1,7 @@
 <?php
 header("content-type:text/html;charset=utf-8");
 error_reporting(E_ALL);//调试请打开报错，实际操作可以屏蔽！
-
+require __DIR__.'/../../conf.php';
 use BLangPack\BLangPack;
 require_once(__DIR__ . '/../autoload.php');
 set_time_limit(1800);//超时设置

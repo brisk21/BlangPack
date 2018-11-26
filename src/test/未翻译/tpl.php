@@ -5,7 +5,8 @@
  * Date: 2018/11/25
  * Time: 14:28
  */
-$nomal =  $lang['woshizhengchangshuchudebianliang'];
+$nomal =  $lang['zidonghuashengchengyuyanbao'];
+$status = ['正常','已关闭']
 ?>
 <!doctype html>
 <html lang="zh">
@@ -14,15 +15,15 @@ $nomal =  $lang['woshizhengchangshuchudebianliang'];
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title><?php echo $lang['wuxuyan']; ?>，<?php echo $lang['zuoziji']; ?></title>
+    <title>有测试</title>
 </head>
 <body>
-<div><?php echo $lang['ceshi']; ?></div>
+<div>标题</div>
 <div>
-    <h1><?php echo $lang['ceshi']; ?>php<?php echo $lang['shuchu']; ?></h1>
+    <h1>就是这么好看，哈哈哈哈或</h1>
     <ul>
-        <li><?php echo  $lang['woshidanyinhaozifuchuan']?></li>
-        <li><?php echo $lang['woshishuangyinhaozifuchuan']?></li>
+        <li><?php echo   '好汉歌'?></li>
+        <li><?php echo "最强杀手"?></li>
         <li><?php echo $nomal?></li>
     </ul>
 </div>

@@ -6,10 +6,10 @@
 namespace BLangPack\Lib;
 use Exception;
 
-define("CURL_TIMEOUT",   10);
-define("URL",            "http://api.fanyi.baidu.com/api/trans/vip/translate");
-define("APP_ID",         ""); //替换为您的APPID
-define("SEC_KEY",        "");//替换为您的密钥
+define("CURL_TIMEOUT",10);
+define("URL","http://api.fanyi.baidu.com/api/trans/vip/translate");
+defined('APP_ID') OR define("APP_ID",""); //替换为您的APPID
+defined('SEC_KEY') OR define("SEC_KEY","");//替换为您的密钥
 /*
  * 支持源语言语种
 zh	中文；en	英语；yue	粤语；wyw	文言文；jp	日语；
