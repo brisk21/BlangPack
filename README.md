@@ -20,6 +20,7 @@
         echo "执行失败";
     }
 
+![效果图片](https://github.com/brisk21/BlangPack/blob/master/code.png)
 #本次修复
 11.24:  
 请求翻译接口超时问题  
