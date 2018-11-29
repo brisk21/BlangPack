@@ -1,10 +1,13 @@
-<?php return array (
-  'zhengchang' => '正常',
-  'yiguanbi' => '已关闭',
-  'youceshi' => '有测试',
-  'biaoti' => '标题',
-  'jiushizhemehaokan' => '就是这么好看',
-  'hahahahahuo' => '哈哈哈哈或',
-  'haohange' => '好汉歌',
-  'zuiqiangshashou' => '最强杀手',
-); ?>
+<?php 
+define('wudifenghuolun','无敌风火轮');
+define('zuorenzuizhongyaoshikaixin','做人最重要是开心');
+define('jiankangshibenqian','健康是本钱');
+define('caozuochenggong','操作成功');
+define('zhuimengrenduhenmei','追梦人都很美');
+define('shiyiderensheng','诗意的人生');
+define('jingcaidepianduan','精彩的片段');
+define('zuozijihexuyan','做自己何须言');
+define('guohaozijideshenghuo','过好自己的生活');
+define('junzishendu','君子慎独');
+define('buqianshi','不欺暗室');
+define('renshinizhenhao','认识你真好');

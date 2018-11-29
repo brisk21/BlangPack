@@ -198,7 +198,12 @@ private function CreateLangPack($data = [],$file_type = 'php')
     switch($file_type){
         case 'PHP':
             $langpackfilename = $this->langpackfilename.'.php';
-            $info = "<?php return " . var_export($data, true) . "; ?>";
+            $info = '<?php '.PHP_EOL;
+            foreach ($data as $key=>$value)
+            {
+                $info .= "define('".$key."','".str_replace("'","\\'",$value)."');".PHP_EOL;
+            }
+           /* $info = "<?php return " . var_export($data, true) . "; ?>";*/
             break;
         case 'JS':
             $langpackfilename = $this->langpackfilename.'.js';

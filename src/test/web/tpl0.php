@@ -5,8 +5,19 @@
  * Date: 2018/11/25
  * Time: 14:28
  */
-$nomal =  $lang['zidonghuashengchengyuyanbao'];
-$status = [ $lang['zhengchang'], $lang['yiguanbi']]
+//测试模块化自动翻译
+function testStr()
+{
+    $data = [
+        'cols'=>wudifenghuolun,
+        'enjoy'=>zuorenzuizhongyaoshikaixin,
+        '3'=>jiankangshibenqian
+    ];
+    return ['code'=>1,'msg'=>caozuochenggong,'data'=>$data];
+}
+
+$nomal =  zhuimengrenduhenmei;
+$status = [ shiyiderensheng, jingcaidepianduan]
 ?>
 <!doctype html>
 <html lang="zh">
@@ -15,17 +26,13 @@ $status = [ $lang['zhengchang'], $lang['yiguanbi']]
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title><?php echo $lang['youceshi']; ?></title>
+    <title><?php echo zuozijihexuyan;//做自己何须言 ?></title>
 </head>
 <body>
-<div><?php echo $lang['biaoti']; ?></div>
+<div><?php echo guohaozijideshenghuo;//过好自己的生活 ?></div>
 <div>
-    <h1><?php echo $lang['jiushizhemehaokan']; ?>，<?php echo $lang['hahahahahuo']; ?></h1>
-    <ul>
-        <li><?php echo    $lang['haohange']?></li>
-        <li><?php echo $lang['zuiqiangshashou']?></li>
-        <li><?php echo $nomal?></li>
-    </ul>
+    <h1><?php echo junzishendu;//君子慎独 ?>，<?php echo buqianshi;//不欺暗室 ?>！</h1>
+    <p><?php echo renshinizhenhao;//认识你真好 ?>！</p>
 </div>
 </body>
 </html>

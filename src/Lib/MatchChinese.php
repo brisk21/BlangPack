@@ -41,12 +41,38 @@ class MatchChinese
         }
         return $return;
     }
-    /*
-     * fixme 替换过程存在重复字符串时导致echo类型替换失败的问题
+
+    /**
+     * 常量模式
      *文件中对应语言包替换
      * 兼容php直接echo的替换，一键匹配
      * */
     public static function contentReplaceTowrite($file,$string,$search,$replace = [])
+    {
+        $path_parts = pathinfo($file);
+        if (!is_file($file) || $path_parts['extension']<>'php' ){
+            return false;
+        }
+
+        $search = self::arrValueSort($search);
+
+        foreach ($search as $key => $v) {
+            //$search[$key] = $v;
+            $res= ChineseToPy::encodePY($v, 'all');//翻译后的
+            if (strpos($string,"'".$v."'")){
+                $string = str_replace("'".$v."'",$res,$string);
+            }elseif (strpos($string,"\"".$v."\"") ){
+                $string = str_replace("\"".$v."\"",$res,$string);
+            }else{
+                $lang = '<?php echo '.$res.';//'.$v.' ?>';
+                $string = str_replace($v,$lang,$string);
+            }
+        }
+        file_put_contents($file,$string);
+    }
+
+    //变量模式
+    public static function contentReplaceTowrite_bak($file,$string,$search,$replace = [])
     {
         $path_parts = pathinfo($file);
         if (!is_file($file) || $path_parts['extension']<>'php' ){
@@ -65,7 +91,7 @@ class MatchChinese
                 $lang = '$lang[\''.$res.'\']';
                 $string = str_replace("\"".$v."\"",$lang,$string);
             }else{
-                $lang = '<?php echo $lang[\''.$res.'\']; ?>';
+                $lang = '<?php echo $lang[\''.$res.'\'];//'.$v.' ?>';
                 $string = str_replace($v,$lang,$string);
             }
         }
