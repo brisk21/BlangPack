@@ -13,6 +13,7 @@ function testStr()
         'enjoy'=>zuorenzuizhongyaoshikaixin,
         '3'=>jiankangshibenqian
     ];
+    $status = ["<span style='color: green'>".zhengchang."</span>",'<span style="color: red">'.yichang.'</span>'];
     return ['code'=>1,'msg'=>caozuochenggong,'data'=>$data];
 }
 

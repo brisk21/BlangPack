@@ -13,6 +13,7 @@ function testStr()
         'enjoy'=>"做人最重要是开心",
         '3'=>"健康是本钱"
     ];
+    $status = ["<span style='color: green'>正常</span>",'<span style="color: red">异常</span>'];
     return ['code'=>1,'msg'=>'操作成功','data'=>$data];
 }
 

@@ -55,14 +55,17 @@ class MatchChinese
         }
 
         $search = self::arrValueSort($search);
-
         foreach ($search as $key => $v) {
-            //$search[$key] = $v;
             $res= ChineseToPy::encodePY($v, 'all');//翻译后的
             if (strpos($string,"'".$v."'")){
                 $string = str_replace("'".$v."'",$res,$string);
             }elseif (strpos($string,"\"".$v."\"") ){
                 $string = str_replace("\"".$v."\"",$res,$string);
+            }elseif (strpos($string,$v.'</span>'."\"") ){
+                $string = str_replace($v.'</span>'."\"","\".".$res.".\"".'</span>'."\"",$string);
+
+            }elseif (strpos($string,$v.'</span>'.'\'') ){
+                $string = str_replace($v.'</span>'.'\'','\'.'.$res.'.\''.'</span>'.'\'',$string);
             }else{
                 $lang = '<?php echo '.$res.';//'.$v.' ?>';
                 $string = str_replace($v,$lang,$string);

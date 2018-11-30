@@ -2,6 +2,8 @@
 define('wudifenghuolun','无敌风火轮');
 define('zuorenzuizhongyaoshikaixin','做人最重要是开心');
 define('jiankangshibenqian','健康是本钱');
+define('zhengchang','正常');
+define('yichang','异常');
 define('caozuochenggong','操作成功');
 define('zhuimengrenduhenmei','追梦人都很美');
 define('shiyiderensheng','诗意的人生');

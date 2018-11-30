@@ -2,6 +2,8 @@
 define('wudifenghuolun','Invincible fire wheel');
 define('zuorenzuizhongyaoshikaixin','Happiness is the most important thing in life.');
 define('jiankangshibenqian','Health is capital.');
+define('zhengchang','normal');
+define('yichang','abnormal');
 define('caozuochenggong','Successful operation');
 define('zhuimengrenduhenmei','The dreamers are beautiful.');
 define('shiyiderensheng','Poetic life');
