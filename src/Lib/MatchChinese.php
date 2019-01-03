@@ -66,8 +66,12 @@ class MatchChinese
 
             }elseif (strpos($string,$v.'</span>'.'\'') ){
                 $string = str_replace($v.'</span>'.'\'','\'.'.$res.'.\''.'</span>'.'\'',$string);
+            }elseif (strpos($string,'//'.$v) ){
+               // echo '//'.$v,'<br>';
+                //continue;
             }else{
-                $lang = '<?php echo '.$res.';//'.$v.' ?>';
+                $lang = '<?php echo '.$res.'?>';
+               /* $lang = '<?php echo '.$res.';//'.$v.' ?>';*/
                 $string = str_replace($v,$lang,$string);
             }
         }
