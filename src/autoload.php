@@ -11,7 +11,5 @@ spl_autoload_register(function($class){
     $file = str_replace('//',DIRECTORY_SEPARATOR,__DIR__.DIRECTORY_SEPARATOR.$path.'.php');
     if (file_exists($file)){
         require $file;
-    }/*else{
-        echo $file,'=>Not exists';//调试
-    }*/
+    }
 });
